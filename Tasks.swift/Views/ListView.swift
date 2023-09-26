@@ -13,7 +13,7 @@ struct ListView: View {
     @State var items: [String] = [
         "Prova Fisica 1",
         "Treino ",
-        "Curso 18h"
+        "Prova Calculo 18h"
     ]
     
     var body: some View {
@@ -28,50 +28,30 @@ struct ListView: View {
                 }
             }
         }
-        .listStyle(PlainListStyle())
-        .navigationTitle("Tarefas do dia")
-        .navigationBarItems(
-            leading: EditButton(),
-            trailing: Button(action: {
-                isAddViewPresented = true
-            }) {
-                Image(systemName: "plus")
-            }
-        )
-    }
+            .listStyle(PlainListStyle())
+            .navigationTitle("Minhas Tarefas 📝")
+            .navigationBarItems(
+                leading: EditButton(),
+                trailing:
+                    NavigationLink ("Add", destination: AddView())
+                )
+             
+                    
+                }
+          
+        }
         
-}
-
-struct AddView: View {
-    @Binding var items: [String]
-    @State private var newItem = ""
+       
+        
     
-    var body: some View {
-        VStack {
-            TextField("Nova tarefa", text: $newItem)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            Button(action: {
-                items.append(newItem)
-                newItem = ""
-            }) {
-                Text("Adicionar")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(10)
+    
+    
+    
+    struct ListView_Previews: PreviewProvider {
+        static var previews: some View {
+            NavigationView{
+                ListView()
             }
-            .padding()
         }
     }
-}
-
-struct ListView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-            ListView()
-        }
-    }
-}
 
